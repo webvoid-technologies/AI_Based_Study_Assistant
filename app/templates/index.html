@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI-powered study tools grounded in your uploaded document.">
+  <title>{% block title %}AI Study Assistant{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}?v=3">
+</head>
+<body>
+  {% block content %}{% endblock %}
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="{{ url_for('static', path='/js/app.js') }}?v=3" defer></script>
+</body>
+</html>

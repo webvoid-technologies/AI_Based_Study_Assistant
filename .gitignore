@@ -1,0 +1,14 @@
+# Project-local virtual environment
+.venv/
+
+# Local secrets and environment configuration
+.env
+
+# Python cache and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Runtime upload workspace
+app/uploads/*
+!app/uploads/.gitkeep

@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-mark">A</span><div><strong>AI Study</strong><small>Assistant</small></div></div>
+    <nav aria-label="Main navigation">
+      <a class="nav-link active" href="#dashboard">Dashboard</a>
+      <a class="nav-link" href="#result" data-action="summarize">Summary</a>
+      <a class="nav-link" href="#result" data-action="practice">Practice Questions</a>
+      <a class="nav-link" href="#result" data-action="mcq">MCQs</a>
+      <a class="nav-link" href="#explain-card">Explain Topic</a>
+      <a class="nav-link" href="#document-info">Document Info</a>
+    </nav>
+    <div class="provider"><span></span> Powered by Groq</div>
+  </aside>
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <main>
+    <header class="topbar">
+      <button class="menu-button" id="menu-button" aria-label="Open menu" aria-expanded="false">☰</button>
+      <div><p class="eyebrow">LEARNING WORKSPACE</p><h1>Study smarter with your notes</h1></div>
+      <span class="privacy-badge">RAM only</span>
+    </header>
+
+    <section id="dashboard" class="hero-grid">
+      <article class="glass-card upload-card">
+        <div class="section-heading"><div><p class="eyebrow">STEP 1</p><h2>Upload study material</h2></div><span class="limit">Max 20 MB</span></div>
+        <form id="upload-form">
+          <input id="file-input" name="file" type="file" accept=".pdf,.docx,.pptx,.xlsx,.png,.jpg,.jpeg,.json,.txt" hidden>
+          <label for="file-input" class="drop-zone" id="drop-zone">
+            <span class="upload-icon">↑</span><strong>Drop your file here</strong><span>or click to browse</span>
+            <small>PDF · DOCX · PPTX · XLSX · Images · JSON · TXT</small>
+          </label>
+          <div class="progress-wrap" id="progress-wrap" hidden><div class="progress-bar" id="progress-bar"></div></div>
+          <p class="upload-status" id="upload-status" hidden></p>
+        </form>
+      </article>
+
+      <article class="glass-card document-card" id="document-info">
+        <div class="section-heading"><div><p class="eyebrow">CURRENT SESSION</p><h2>Document info</h2></div><span class="status-badge" id="document-status">Waiting</span></div>
+        <div class="empty-state" id="empty-document"><div class="file-placeholder">DOC</div><p>Upload a document to begin.</p></div>
+        <div id="document-details" hidden>
+          <div class="document-name"><span class="file-placeholder success">OK</span><div><strong id="filename"></strong><span id="uploaded-at"></span></div></div>
+          <div class="stats"><div><strong id="filetype">—</strong><span>File type</span></div><div><strong id="word-count">0</strong><span>Words</span></div><div><strong id="character-count">0</strong><span>Characters</span></div></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="actions-section">
+      <div class="section-heading"><div><p class="eyebrow">STEP 2</p><h2>Choose a study tool</h2></div></div>
+      <div class="action-grid">
+        <button class="action-card" data-action="summarize" disabled><span class="action-number">01</span><strong>Summarize</strong><small>Short and detailed insights</small></button>
+        <button class="action-card" data-action="practice" disabled><span class="action-number">02</span><strong>Practice Questions</strong><small>Short, long and viva</small></button>
+        <button class="action-card" data-action="mcq" disabled><span class="action-number">03</span><strong>Interactive MCQs</strong><small>10-question scored quiz</small></button>
+        <button class="action-card" data-scroll="explain-card" disabled><span class="action-number">04</span><strong>Explain Topic</strong><small>Simple, grounded explanations</small></button>
+      </div>
+    </section>
+
+    <section class="glass-card explain-card" id="explain-card">
+      <div class="section-heading"><div><p class="eyebrow">ASK FROM YOUR MATERIAL</p><h2>Explain a topic</h2></div><span id="topic-counter">0 / 500</span></div>
+      <form id="explain-form"><input id="topic-input" maxlength="500" minlength="2" placeholder="Example: Explain inheritance in simple terms" disabled required><button class="primary-button" type="submit" disabled>Explain</button></form>
+    </section>
+
+    <section class="glass-card result-card" id="result" hidden>
+      <div class="section-heading"><div><p class="eyebrow">AI RESULT</p><h2 id="result-title">Your result</h2></div><div class="result-actions"><button id="copy-button" class="secondary-button">Copy</button><button id="download-button" class="secondary-button">Download TXT</button></div></div>
+      <div id="result-loading" class="ai-loading" hidden aria-live="polite" aria-busy="true">
+        <div class="loading-orb"><span></span><span></span><span></span></div>
+        <div class="loading-copy"><strong id="loading-title">Generating result</strong><p id="loading-subtitle">Reading your document…</p></div>
+        <div class="loading-skeleton"><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div id="result-content" class="prose" aria-live="polite"></div>
+    </section>
+  </main>
+</div>
+{% endblock %}
